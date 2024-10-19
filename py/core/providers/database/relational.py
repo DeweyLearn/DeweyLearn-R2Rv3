@@ -42,9 +42,13 @@ class PostgresRelationalDBProvider(
 
     async def initialize(self):
         try:
+            print(">>>")
+            print("Connecting to Postgres database...using statement_cache_size=0")
+            print(">>>")
             self.pool = await asyncpg.create_pool(
                 self.connection_string,
                 max_size=self.postgres_configuration_settings.max_connections,
+                statement_cache_size=0,
             )
 
             logger.info(

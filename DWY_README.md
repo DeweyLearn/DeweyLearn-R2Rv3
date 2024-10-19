@@ -13,10 +13,35 @@ R2R has a good website and AI helper. Fro questions start here [R2R](https://r2r
 2. cd /py
 3. poerty install
 4. poetry shell (make sure to run Python 3.12)
-   
-Execute:
+
+## For use with supabase make the follwing change in the file [relational.py](py/r2r/database/relational.py)
+```
+    async def initialize(self):
+        try:
+            self.pool = await asyncpg.create_pool(
+                self.connection_string,
+                max_size=self.postgres_configuration_settings.max_connections,
+
+                # TODO: required to work with supabase
+                statement_cache_size=0,
+            )
+```
+
+5. Now build the custom docker image
+```
+docker build -t r2r/deweylearn-r2r .
+```
+
+6. Add/Update `R2R_IMAGE=r2r/deweylearn-r2r:latest` to reflect the new image name.
+
+7. Optional but recommended: change the `r2r-network` to `deweylearn`.
+
+
+**Execute:**
 1. `source .env`
-2. `poetry run r2r serve --docker --exclude-postgres --config-name=my_r2.toml`
+2. `docker-compose config` to check if all env settings are in place
+   
+3. `poetry run r2r serve --docker --exclude-postgres --config-name=my_r2.toml`
 
 ### Troubleshooting
 Answer ` Unset it? [Y/n]: n` with n. We want to keep the env settings
@@ -26,11 +51,12 @@ Answer ` Unset it? [Y/n]: n` with n. We want to keep the env settings
 
 ## Maintance
 - run `docker system prune -a` every once in a while to remove unused images and containers
+- If required one can delete all R2R tables from the db using `DROP schema "deweylearn_main" cascade;` Schema name is based on the `R2R_PROJECT_NAME` in the `.env` file.
 
 
 ## Customization
 - make sure to create unique name for `vecs_collection` = "deweylearn_v2_vecs"
-
+- this is the name of the table in the database: `R2R_PROJECT_NAME=deweylearn_r2r_main`
 
 my_r2r.toml
 ```
@@ -72,7 +98,7 @@ new_after_n_chars = 1500
 overlap = 20
 ```
 
-## Ussage
+## Usage
 
 ### Setup one or more users. Still unclear as to where to manager users and how to sync.
 

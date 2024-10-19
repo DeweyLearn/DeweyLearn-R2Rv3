@@ -1,5 +1,5 @@
 [auth]
-default_admin_email = "dirkn@deweylearn.ai"
+default_admin_email = "dirk@deweylearn.ai"
 default_admin_password = "live-learn-summer-happiness"
 require_email_verification = false
 require_authentication = false
