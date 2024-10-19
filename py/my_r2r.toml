@@ -1,0 +1,42 @@
+[auth]
+default_admin_email = "dirkn@deweylearn.ai"
+default_admin_password = "live-learn-summer-happiness"
+require_email_verification = false
+require_authentication = false
+
+[completion]
+provider = "litellm"
+concurrent_request_limit = 16
+
+    [completion.generation_config]
+    model = "openai/gpt-4o"
+    temperature = 0.1
+    top_p = 1
+    max_tokens_to_sample = 1_024
+    stream = false
+    add_generation_kwargs = {}
+
+[embedding]
+provider = "litellm"
+base_model = "text-embedding-3-small"
+base_dimension = 1536
+
+[database]
+provider = "postgres"
+user = "postgres.wwsgmwylkhzowrfagkuf"
+password = "live-learn-summer-happiness"
+host = "aws-0-us-east-1.pooler.supabase.com"
+port = "6543"
+db_name = "postgres"
+vecs_collection = "deweylearn_r2r_main_vecs_collection"
+
+[chunking]
+provider = "unstructured_local"  # or "unstructured_api"
+strategy = "auto"  # "auto", "fast", or "hi_res"
+chunking_strategy = "by_title"  # "by_title" or "basic"
+
+# Core chunking parameters
+combine_under_n_chars = 128
+max_characters = 500
+new_after_n_chars = 1500
+overlap = 20
