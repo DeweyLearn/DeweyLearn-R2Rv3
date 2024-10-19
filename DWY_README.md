@@ -1,5 +1,5 @@
 # R2R for DeweyLearn
-R2R has a good website and AI helper. Fro questions start here [R2R](https://r2r-docs.sciphi.ai/documentation/installation/light/local-system#postgres-pgvector).
+R2R has a good website and AI helper bot. For questions start here [R2R](https://r2r-docs.sciphi.ai/documentation/installation/light/local-system#postgres-pgvector).
 
 
 ## Pre-requisites
@@ -11,7 +11,7 @@ R2R has a good website and AI helper. Fro questions start here [R2R](https://r2r
 
 1. Clone latest R2R repo.
 2. cd /py
-3. poerty install
+3. poetry install
 4. poetry shell (make sure to run Python 3.12)
 
 ## For use with supabase make the follwing change in the file [relational.py](py/r2r/database/relational.py)
