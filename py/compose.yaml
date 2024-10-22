@@ -1,5 +1,5 @@
 networks:
-  r2r-network:
+  deweylearn:
     driver: bridge
     attachable: true
     labels:
@@ -22,7 +22,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
-      - r2r-network
+      - deweylearn
     ports:
       - "${R2R_POSTGRES_PORT:-5432}:5432"
     healthcheck:
@@ -100,7 +100,7 @@ services:
       - OLLAMA_API_BASE=${OLLAMA_API_BASE:-http://host.docker.internal:11434}
 
     networks:
-      - r2r-network
+      - deweylearn
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:${R2R_PORT:-7272}/v2/health"]
       interval: 6s
@@ -117,6 +117,6 @@ services:
     environment:
       - NEXT_PUBLIC_R2R_DEPLOYMENT_URL=${R2R_DEPLOYMENT_URL:-http://localhost:7272}
     networks:
-      - r2r-network
+      - deweylearn
     ports:
       - "${R2R_DASHBOARD_PORT:-7273}:3000"

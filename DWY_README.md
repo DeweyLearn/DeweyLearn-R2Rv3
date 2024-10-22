@@ -32,16 +32,21 @@ R2R has a good website and AI helper bot. For questions start here [R2R](https:/
 docker build -t r2r/deweylearn-r2r .
 ```
 
-6. Add/Update `R2R_IMAGE=r2r/deweylearn-r2r:latest` to reflect the new image name.
+6. Add/Update `r2r/deweylearn-r2r:latest` in the compose file to reflect the new image name.
+```
+r2r:
+image: r2r/deweylearn-r2r:latest
+build:
+    context: .
+```
 
 7. Optional but recommended: change the `r2r-network` to `deweylearn`.
 
 
 **Execute:**
-1. `source .env`
-2. `docker-compose config` to check if all env settings are in place
-   
-3. `poetry run r2r serve --docker --exclude-postgres --config-name=my_r2.toml`
+1. `source .env`   
+2. `poetry run r2r serve --docker --exclude-postgres --config-path=my_r2r.toml`
+
 
 ### Troubleshooting
 Answer ` Unset it? [Y/n]: n` with n. We want to keep the env settings
