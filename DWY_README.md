@@ -104,6 +104,16 @@ overlap = 20
 ```
 
 ## Usage
+1. check that port forwading for port `7272` and `7273` is enabled.
+2. head over to http://localhost:7273/
+3. login using 
+```
+dirk@deweylearn.ai
+live-learn-summer-happiness
+
+this is set in myu_r2r.toml
+```
+
 
 ### Setup one or more users. Still unclear as to where to manager users and how to sync.
 
